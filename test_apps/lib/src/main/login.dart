@@ -9,6 +9,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -128,6 +129,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void _bypassLogin() {
+    // Generate a dummy token for testing
+    const dummyToken = 'dummy_token_for_testing';
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const ProfilePage(token: dummyToken)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,6 +167,8 @@ class _LoginPageState extends State<LoginPage> {
                   isPassword: true),
               const SizedBox(height: 20),
               _buildLoginButton(),
+              const SizedBox(height: 20),
+              _buildBypassButton(),
               const SizedBox(height: 20),
               _buildRegisterLink(),
             ],
@@ -236,6 +250,23 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: const Text('Login'),
         ),
+      ),
+    );
+  }
+
+  Widget _buildBypassButton() {
+    return ElevatedButton(
+      onPressed: _bypassLogin,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.red,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      child: const Text(
+        'Bypass Login (For Testing)',
+        style: TextStyle(color: Colors.white, fontSize: 16),
       ),
     );
   }

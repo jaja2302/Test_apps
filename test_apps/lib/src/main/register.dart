@@ -155,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
         // Since the response doesn't provide a token, we'll navigate to the login page instead
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
+          MaterialPageRoute(builder: (context) => const LoginPage()),
         );
       } else if (response.statusCode == 301 || response.statusCode == 302) {
         // Handle redirect manually
